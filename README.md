@@ -3,23 +3,36 @@ A.the way how you prepare the training samples
 
 用imageio讀入
 key1 = imageio.imread('key1.png')
+
 key2 = imageio.imread('key2.png')
+
 I = imageio.imread('I.png')
+
 E = imageio.imread('E.png')
+
 Eprime = imageio.imread('Eprime.png')
 
 
 B.	all parameters, such as MaxIterLimit, α , and 𝜖 , you used for the training algorithm
 
 key1 = imageio.imread('key1.png')
+
 key2 = imageio.imread('key2.png')
+
 I = imageio.imread('I.png')
+
 E = imageio.imread('E.png')
+
 Eprime = imageio.imread('Eprime.png')
+
 maxlterlimit = 3
+
 size = key1.shape
+
 H = size[0]#image height
+
 W = size[1]#image width
+
 𝜖,α = 0.00001
 
 
