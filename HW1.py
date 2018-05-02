@@ -45,6 +45,8 @@ finalpic = (Eprime-(weight[0]*key1)-(weight[1]*key2))/weight[2]
 #equation(1)
 
 plt.imshow(finalpic, cmap='gray')
+plt.savefig("finalpic.png")
+
 
 
 
