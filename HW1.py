@@ -1,17 +1,15 @@
 import numpy as np
-import cv2
-#import matplotlib.pyplot as plt
+import imageio
+import matplotlib.pyplot as plt
+#import cv2
 
 #read image
-key1 = cv2.imread('key1.png')
-key2 = cv2.imread('key2.png')
-imgI = cv2.imread('I.png')
-imgE = cv2.imread('E.png')
-imgEprime = cv2.imread('Eprime.png')
+key1 = imageio.imread('key1.png')
+key2 = imageio.imread('key2.png')
+I = imageio.imread('I.png')
+E = imageio.imread('E.png')
+Eprime = imageio.imread('Eprime.png')
 
-cv2.imshow('image',key1)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
 epoch = 1
 
@@ -27,18 +25,26 @@ size = key1.shape
 H = size[0]#image height
 W = size[1]#image width
 
-#wk
-#xk
-#ak
 
-while(epoch == 1 or epoch<maxlterlimit and w[0]-w[1]>a):
-    for i in range[0,W]:
-        for j range[0,H]:
-            x[i,j] = [k1[i,j],k2[i,j],I[i,j]]
-            ak[i,j] = w[i,j]*x[i,j]
-            e[i,j] = E[i,j] - ak[i,j]
-            w[i+1,j+1] = w[i,j] + a*e[i,j]*x[i,j]
+while(epoch == 1 or epoch<maxlterlimit and np.any(np.absolute(weight[1]-weight[0]))>a):
+    for i in range(0,H):
+        for j in range(0,W):
+            xk = [key1[i][j],key2[i][j],I[i][j]]
+            ak = weight[0]*xk[0] + weight[1]*xk[1] + weight[2]*xk[2]
+            e = E[i][j] - ak
+            weight[0] = weight[0] + a*e*xk[0]
+            weight[1] = weight[1] + a*e*xk[1]
+            weight[2] = weight[2] + a*e*xk[2]
+    
+    print("epoch = ",epoch)
     epoch = epoch + 1
+
+print("weight = ",weight)
+
+finalpic = (Eprime-(weight[0]*key1)-(weight[1]*key2))/weight[2]
+#equation(1)
+
+plt.imshow(finalpic, cmap='gray')
 
 
 
